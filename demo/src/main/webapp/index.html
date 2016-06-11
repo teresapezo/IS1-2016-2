@@ -1,0 +1,73 @@
+<html>
+   <head>
+   
+      <style>
+		table {
+		    width:60%;
+		}
+		table, th, td {
+		    border: 1px solid black;
+		}
+		th, td {
+		    padding: 3px;
+		    text-align: left;
+		}
+		table#t01 tr:nth-child(even) {
+		    background-color: #eee;
+		}
+		table#t01 tr:nth-child(odd) {
+		   background-color:#fff;
+		}
+		table#t01 th	{
+		    background-color: black;
+		    color: white;
+		}	
+	</style>
+   
+   
+      <title>Alumnos</title>
+
+      <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+      <script type="text/javascript">
+         function alumnoController($scope,$http) {
+             $http.get("alumnos").success( function(response) {
+                 $scope.alumnos = response;
+              });
+             $http.get("cursos").success( function(response) {
+                 $scope.cursos = response;
+              });
+             $http.post("cursos", '{"codigo": "02", "nombre": "IPOO II"}').success( function(response) {
+              });
+         }
+      </script>
+   </head>
+   <body>
+      <div ng-app="" ng-controller="alumnoController">
+      	<h3>Alumnos</h3>
+         <table id="t01">
+            <tr>
+               <th>Nombres</th>
+               <th>Apellido Paterno</th>
+               <th>Promedio</th>
+            </tr>
+            <tr ng-repeat = "alumno in alumnos">
+               <td>{{ alumno.nombres }}</td>
+               <td>{{ alumno.apellidoPaterno }}</td>
+               <td>{{ alumno.promedio }}</td>
+            </tr>
+         </table>
+         <h3>Cursos</h3>
+         <table border="1">
+            <tr>
+               <th>Codigo</th>
+               <th>Nombre</th>
+            </tr>
+            <tr ng-repeat = "curso in cursos">
+               <td>{{ curso.codigo }}</td>
+               <td>{{ curso.nombre }}</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

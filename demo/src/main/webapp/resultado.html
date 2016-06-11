@@ -1,0 +1,52 @@
+<html>
+   <head>
+   <style>
+		table {
+		    width:60%;
+		}
+		table, th, td {
+		    border: 1px solid black;
+		}
+		th, td {
+		    padding: 3px;
+		    text-align: left;
+		}
+		table#t01 tr:nth-child(even) {
+		    background-color: #eee;
+		}
+		table#t01 tr:nth-child(odd) {
+		   background-color:#fff;
+		}
+		table#t01 th	{
+		    background-color: black;
+		    color: white;
+		}	
+	</style>
+   
+      <title>listado matriculados</title>
+
+      <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+      <script type="text/javascript">
+         function alumnoController($scope,$http) {
+        	 $http.get("matriculas").success( function(response) {
+                 $scope.matriculas = response;
+              });
+         }
+      </script>
+   </head>
+   <body>
+      	<div ng-app="" ng-controller = "alumnoController">
+	      	<table id="t01">
+	            <tr>
+	               <th>codigo del alumno</th>
+	               <th>codigo del curso</th>
+	            </tr>
+	            <tr ng-repeat = "matricula in matriculas">
+	               <td>{{ matricula.alumno_id }}</td>
+	               <td>{{ matricula.curso_id }}</td>
+	            </tr>
+	         </table>
+   		</div>
+   </body>
+</html>

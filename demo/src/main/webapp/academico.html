@@ -1,0 +1,40 @@
+<html>
+   <head>
+      <title>academico</title>
+
+      <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+      <script type="text/javascript">
+         function alumnoController($scope,$http) {
+              $scope.ButtonClick = function(){
+            	 var Matricula = {
+        				 alumno_id: $scope.alumno_id,
+        				 curso_id: $scope.curso_id
+        		 };
+            	 $http.post("matriculas", Matricula).success( function(response) {
+                 });
+        	 } 
+         }
+         
+      </script>
+   
+   
+   </head>
+   <body>
+      	<div ng-app="" ng-controller = "alumnoController">
+      		cod alumno : 
+	      	<input type='text'
+	      		   name = 'alumno_id'
+	      		   ng-model ='alumno_id' />
+	      	cod curso: 
+	      	<input type='text'
+	      		   name = 'curso_id'
+	      		   ng-model = 'curso_id' />
+	   		<input type="button"
+	   			   value = "Ok"
+	   			   ng-click="ButtonClick()"/>
+   		</div>
+   		
+   		
+   </body>
+</html>
